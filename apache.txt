@@ -1,0 +1,22 @@
+<IfModule mod_mime.c>
+  AddType application/wasm .wasm
+  AddType application/octet-stream .data
+  AddType application/javascript .js
+  
+  # Brotli compression
+  AddEncoding br .br
+  AddType application/wasm .wasm.br
+  AddType application/octet-stream .data.br
+  AddType application/javascript .js.br
+  
+  # Gzip compression
+  AddEncoding gzip .gz
+  AddType application/wasm .wasm.gz
+  AddType application/octet-stream .data.gz
+  AddType application/javascript .js.gz
+</IfModule>
+
+<FilesMatch "\.(br|gz)$">
+  RemoveLanguage .br .gz
+  ForceType application/octet-stream
+</FilesMatch>
